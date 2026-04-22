@@ -2,7 +2,7 @@ terraform init
 terraform fmt
 terraform validate
 terraform plan
-terraform plan -out="multi-agent-terra-solution.tfplan"
+terraform plan -out="multi-agent.tfplan"
 terraform apply -auto-approve
 terraform destroy -auto-approve
 terraform output openai_endpoint
