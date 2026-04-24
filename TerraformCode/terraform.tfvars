@@ -10,6 +10,26 @@ location = "East US"
 
 use_ai_foundry  = true
 deployment_name = "gpt-4o-mini-deployment"
+deployments = [
+  {
+    name    = "gpt-5-4-mini-deployment"
+    model   = "gpt-5.4-mini"
+    version = "2026-03-17"
+    sku     = "GlobalStandard"
+  },
+  {
+    name    = "gpt-5-4-deployment"
+    model   = "gpt-5.4"
+    version = "2026-03-05"
+    sku     = "GlobalStandard"
+  },
+  {
+    name    = "o4-mini-deployment"
+    model   = "o4-mini"
+    version = "2025-04-16"
+    sku     = "GlobalStandard"
+  }
+]
 
 use_private_access           = false
 vnet_address_space           = "10.0.0.0/16"

@@ -34,6 +34,15 @@ variable "deployment_name" {
   default     = "gpt-4o-mini-deployment"
   description = "The name you will use in your Python code"
 }
+variable "deployments" {
+  type = list(object({
+    name    = string
+    model   = string
+    version = string
+    sku     = string
+  }))
+}
+
 variable "use_ai_foundry" {
   type        = bool
   default     = true

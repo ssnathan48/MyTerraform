@@ -89,18 +89,34 @@ resource "azurerm_cognitive_account_project" "project" {
 
 #-----------------------------------------------------
 # 2.2. The specific Model Deployment (The "Brain")
-resource "azurerm_cognitive_deployment" "gpt4o_mini" {
-  name                 = var.deployment_name
+#resource "azurerm_cognitive_deployment" "gpt4o_mini" {
+#  name                 = var.deployment_name
+#  cognitive_account_id = azurerm_cognitive_account.ai_resource.id
+
+#  model {
+#    format  = "OpenAI"
+#    name    = "gpt-4o-mini"
+#    version = "2024-07-18"
+#  }
+
+#  sku {
+#    name = "GlobalStandard"
+#  }
+#  depends_on = [azurerm_cognitive_account.ai_resource]
+#}
+resource "azurerm_cognitive_deployment" "models" {
+  for_each = { for d in var.deployments : d.name => d }
+
+  name                 = each.value.name
   cognitive_account_id = azurerm_cognitive_account.ai_resource.id
 
   model {
     format  = "OpenAI"
-    name    = "gpt-4o-mini"
-    version = "2024-07-18"
+    name    = each.value.model
+    version = each.value.version
   }
 
   sku {
-    name = "GlobalStandard"
+    name = each.value.sku
   }
-  depends_on = [azurerm_cognitive_account.ai_resource]
 }

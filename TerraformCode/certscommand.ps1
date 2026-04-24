@@ -6,7 +6,11 @@ $cert = New-SelfSignedCertificate -Type Custom -KeySpec Signature `
 -KeyUsage CertSign
 
 #export certificate generation
-Export-Certificate -Cert $cert -FilePath "C:\temp\SwamiRootCert.cer"
+Export-Certificate -Cert $cert -FilePath "C:\development\MySamples\TerraformCode\certs\SwamiRootCert.cer"
+
+[System.Convert]::ToBase64String(
+    [System.IO.File]::ReadAllBytes("C:\development\MySamples\TerraformCode\certs\SwamiRootCert.cer")
+) | Out-File "C:\development\MySamples\TerraformCode\certs\SwamiRootCert_Base64.txt"
 
 #client certificate generation
 New-SelfSignedCertificate -Type Custom -DnsName "SwamiClientCert" `
